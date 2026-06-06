@@ -8,13 +8,15 @@
 </head>
 <body>
 
+
 <div class="appTitle">TROJAN</div>
 
 <div class="topbar">
     <input type="file" id="upload" accept="image/jpeg,image/png,image/webp" multiple>
     <button onclick="centerImage()">🎯 จัดกลาง</button>
     <button onclick="toggleLockImage()" id="lockBtn">🔓 ปลดล็อกภาพ</button>
-    
+        <!-- █████ แก้ปุ่มนี้ให้ทำงาน █████ -->
+    <button onclick="goToPage2()">🚀 ไปยังหน้า 2</button>
     <div class="ctrl-group">
         <span>🔍 กำลังขยายวงที่เลือก</span>
         <input type="range" id="zoomSlider" min="0.1" max="12" step="0.1" value="0.1" disabled>
@@ -79,8 +81,8 @@
 
 <div class="info">
    🔊<br>
-    <div id="voiceFeedback" class="voice-status">🎙️ สถานะ: พร้อม (กด 2 หรือปุ่มไมค์)</div>
-    <span id="selectedInfo" class="selection-status">✨ ไม่มีวงถูกเลือก</span>
+    <div id="voiceFeedback" class="voice-status"></div>
+    <span id="selectedInfo" class="selection-status"></span>
     <div id="textSelectionStatus" style="font-size:1px; margin-top: 1px;"></div>
 </div>
 
@@ -90,6 +92,15 @@
 <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
 <script src="script-capture.js"></script>
 <script src="script6.js"></script>
-
+<!-- █████ เพิ่มฟังก์ชันเปลี่ยนหน้า █████ -->
+<script>
+function goToPage2() {
+    // ถ้ามีไฟล์ page2.html อยู่ในโฟลเดอร์เดียวกัน
+    window.location.href = 'page2.html';
+    
+    // หรือถ้าต้องการเปิดในแท็บใหม่ ให้ใช้บรรทัดด้านล่างแทน
+    // window.open('page2.html', '_blank');
+}
+</script>
 </body>
 </html>
