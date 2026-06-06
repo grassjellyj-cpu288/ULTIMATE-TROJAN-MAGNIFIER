@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>ULTIMATE TROJAN MAGNIFIER · พิมพ์ข้อความไทย</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="appTitle">TROJAN</div>
+
+<div class="topbar">
+    <input type="file" id="upload" accept="image/jpeg,image/png,image/webp" multiple>
+    <button onclick="centerImage()">🎯 จัดกลาง</button>
+    <button onclick="toggleLockImage()" id="lockBtn">🔓 ปลดล็อกภาพ</button>
+    
+    <div class="ctrl-group">
+        <span>🔍 กำลังขยายวงที่เลือก</span>
+        <input type="range" id="zoomSlider" min="0.1" max="12" step="0.1" value="0.1" disabled>
+        <span id="zoomValue">0.1x</span>
+    </div>
+
+    <div class="ctrl-group">
+        <span>🔘 ขนาดวงขยาย</span>
+        <input type="range" id="radiusSlider" min="30" max="100" step="1" value="90">
+        <span id="radiusValue">90</span> px
+        <button id="radiusMinusBtn" style="background:#4b5563; margin-left:5px;">−5</button>
+        <button id="radiusPlusBtn" style="background:#4b5563;">+5</button>
+    </div>
+
+    <div class="ctrl-group">
+        <span>🖊 เส้นชี้</span>
+        <input type="range" id="lineSlider" min="1" max="20" step="1" value="1">
+        <span id="lineValue">1</span>
+    </div>
+    
+    <div class="ctrl-group">
+        <span>🔵 จุดนำ</span>
+        <input type="range" id="pointSlider" min="5" max="30" step="1" value="5">
+        <span id="pointValue">5</span>
+    </div>
+    
+    <div class="ctrl-group">
+        <span>🎨 พื้นหลังสี</span>
+        <input type="color" id="bgColor" value="#222222">
+    </div>
+    
+    <button onclick="downloadImage()">💾 Export PNG</button>
+    <button id="bgToggleBtn" style="background:#7c3aed;">🖼 เปิดพื้นหลัง</button>
+    
+    <button id="bgUrl1Btn" style="background:#2d6a4f;">🌄 BG 1</button>
+    <button id="bgUrl2Btn" style="background:#1b4d3e;">🌅 BG 2</button>
+    <button id="bgUrl3Btn" style="background:#1b4d3e;">🏔️ BG 3</button>
+
+    <input type="text" id="customBgUrl" class="bg-url-input" placeholder="URL รูปพื้นหลัง...">
+    <button id="setCustomBgBtn" style="background:#6c757d;">ตั้งค่า BG</button>
+    
+    <button id="voiceMicBtn" style="background:#e67e22;">🎙️ ฟังเสียง (กด 2)</button>
+    <button id="clearAllMarkersBtn" style="background:#b91c1c;">🗑️ ล้างวงทั้งหมด</button>
+    <button id="speakToggleBtn" style="background:#f97316;">🔊 เปิดเสียงตอบกลับ</button>
+    
+    <!-- ปุ่มสแคปเฉพาะพื้นที่ – ใช้ onclick="captureScreen()" -->
+    <button onclick="captureScreen()" style="background:#10b981;">📸 สแคปเฉพาะพื้นที่</button>
+    
+    <button id="addTextBtn" style="background:#8b5cf6;">➕ เพิ่มข้อความไทย</button>
+    
+    <div id="textControls" style="display: none;">
+        <span>📝 ข้อความที่เลือก</span>
+        <input type="range" id="textSizeSlider" min="12" max="96" step="2" value="28">
+        <span id="textSizeValue">28</span>
+        <input type="color" id="textColorPicker" value="#ffffff">
+        <button id="editTextBtn" style="background:#3b82f6;">✏️ แก้ไขข้อความ</button>
+        <button id="deleteTextBtn" style="background:#ef4444;">🗑️ ลบ</button>
+    </div>
+</div>
+
+<canvas id="canvas"></canvas>
+
+<div class="info">
+   🔊<br>
+    <div id="voiceFeedback" class="voice-status">🎙️ สถานะ: พร้อม (กด 2 หรือปุ่มไมค์)</div>
+    <span id="selectedInfo" class="selection-status">✨ ไม่มีวงถูกเลือก</span>
+    <div id="textSelectionStatus" style="font-size:1px; margin-top: 1px;"></div>
+</div>
+
+<script src="script.js"></script>
+<script src="script4.js"></script>
+<script src="script5.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+<script src="script-capture.js"></script>
+<script src="script6.js"></script>
+
+</body>
+</html>
