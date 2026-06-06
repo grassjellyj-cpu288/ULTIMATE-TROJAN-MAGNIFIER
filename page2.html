@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>หน้า 2 - SMART SHARPEN PRO ULTRA</title>
+    <style>
+        * {
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(135deg, #0b0b1a 0%, #10172b 100%);
+            font-family: 'Segoe UI', 'Poppins', system-ui, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            background: rgba(18, 20, 35, 0.85);
+            backdrop-filter: blur(12px);
+            border-radius: 2rem;
+            padding: 1.5rem;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.6);
+            border: 1px solid rgba(0, 212, 255, 0.3);
+            width: 100%;
+            max-width: 1400px;
+        }
+
+        .dashboard {
+            display: grid;
+            grid-template-areas: 
+                "top-area top-area top-area"
+                "left-area canvas-area right-area"
+                "bottom-area bottom-area bottom-area";
+            grid-template-columns: 280px 1fr 260px;
+            grid-template-rows: auto 1fr auto;
+            gap: 1.2rem;
+            align-items: start;
+        }
+
+        .top-panel {
+            grid-area: top-area;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1rem;
+            background: rgba(0, 0, 0, 0.45);
+            backdrop-filter: blur(4px);
+            border-radius: 60px;
+            padding: 0.8rem 1.5rem;
+            border: 1px solid rgba(0, 212, 255, 0.4);
+        }
+
+        .left-panel {
+            grid-area: left-area;
+            background: rgba(10, 12, 28, 0.7);
+            backdrop-filter: blur(8px);
+            border-radius: 1.5rem;
+            padding: 1.2rem;
+            border: 1px solid rgba(0, 212, 255, 0.3);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .canvas-area {
+            grid-area: canvas-area;
+            position: relative;
+            background: #0a0a14;
+            border-radius: 1.2rem;
+            overflow: hidden;
+            box-shadow: 0 0 0 2px #00d4ff55, 0 20px 35px rgba(0, 0, 0, 0.4);
+        }
+
+        canvas {
+            display: block;
+            width: 100%;
+            height: auto;
+            cursor: crosshair;
+        }
+
+        .bottom-panel {
+            grid-area: bottom-area;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1.2rem;
+            background: rgba(0, 0, 0, 0.45);
+            border-radius: 60px;
+            padding: 0.9rem 1.5rem;
+            border: 1px solid rgba(0, 212, 255, 0.4);
+        }
+
+        .right-area {
+            grid-area: right-area;
+        }
+
+        .ctrl-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .ctrl-group label {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #88ffff;
+            font-weight: bold;
+            font-size: 0.85rem;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.5rem;
+        }
+
+        .value-display {
+            background: #00d4ff;
+            color: #0a0f1f;
+            padding: 2px 10px;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: bold;
+        }
+
+        input[type="range"] {
+            width: 100%;
+            height: 6px;
+            border-radius: 10px;
+            background: linear-gradient(90deg, #00d4ff, #ff6b6b);
+            -webkit-appearance: none;
+        }
+
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 18px;
+            height: 18px;
+            background: white;
+            border-radius: 50%;
+            border: 2px solid #00d4ff;
+            cursor: pointer;
+            box-shadow: 0 0 10px cyan;
+        }
+
+        select {
+            background: #10141f;
+            border: 1px solid #00d4ff;
+            color: #00d4ff;
+            padding: 0.6rem 1.2rem;
+            border-radius: 40px;
+            font-weight: bold;
+            font-size: 0.85rem;
+            cursor: pointer;
+        }
+
+        button {
+            background: linear-gradient(135deg, #00d4ff, #0077aa);
+            border: none;
+            padding: 0.7rem 1.8rem;
+            border-radius: 40px;
+            font-weight: bold;
+            color: #0a0f1f;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: transform 0.15s, box-shadow 0.2s;
+            box-shadow: 0 5px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        button:active {
+            transform: scale(0.96);
+        }
+
+        .btn-secondary {
+            background: linear-gradient(135deg, #4b6a8b, #2c3e5c);
+            color: white;
+        }
+
+        .zoom-panel {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.8);
+            border-radius: 16px;
+            padding: 8px;
+            border: 2px solid #00d4ff;
+            backdrop-filter: blur(12px);
+            z-index: 200;
+        }
+
+        .zoom-panel canvas {
+            border-radius: 8px;
+            width: 220px;
+            height: 220px;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 4px;
+            overflow: hidden;
+            margin-top: 12px;
+            display: none;
+        }
+
+        .progress-fill {
+            width: 0%;
+            height: 100%;
+            background: linear-gradient(90deg, #00d4ff, #ff6b6b);
+        }
+
+        .badge-canvas {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            background: #000000aa;
+            color: #0ff;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: bold;
+            pointer-events: none;
+            z-index: 10;
+            backdrop-filter: blur(4px);
+        }
+
+        .back-link {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background: #2c3e5c;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            z-index: 1000;
+        }
+
+        @media (max-width: 860px) {
+            .dashboard {
+                grid-template-columns: 1fr;
+                grid-template-areas: 
+                    "top-area"
+                    "left-area"
+                    "canvas-area"
+                    "bottom-area";
+                gap: 1rem;
+            }
+            .right-area { display: none; }
+            .zoom-panel { transform: scale(0.7); bottom: 5px; right: 5px; }
+        }
+    </style>
+</head>
+<body>
+
+<a href="index.html" class="back-link">← กลับไปหน้าแรก (TROJAN)</a>
+
+<div class="container">
+    <div class="dashboard">
+        <div class="top-panel">
+            <input type="file" id="upload" accept="image/*" style="display: none;">
+            <button id="uploadBtn" class="btn-secondary">📸 อัปโหลดภาพ</button>
+            <select id="mode">
+                <option value="standard">🎨 STANDARD</option>
+                <option value="detail">✨ DETAIL ENHANCE</option>
+                <option value="soft">🌸 SOFT SHARPEN</option>
+            </select>
+            <button id="saveBtn">💾 ตั้งชื่อก่อนเซฟ</button>
+        </div>
+
+        <div class="left-panel">
+            <div class="ctrl-group">
+                <label>🎯 SHARPEN AMOUNT <span id="amountVal" class="value-display">50</span></label>
+                <input type="range" id="amount" min="0" max="200" value="50" step="1">
+            </div>
+            <div class="ctrl-group">
+                <label>⚡ RADIUS <span id="radiusVal" class="value-display">1.5</span></label>
+                <input type="range" id="radius" min="0.5" max="5" value="1.5" step="0.1">
+            </div>
+            <div class="ctrl-group">
+                <label>🛡️ THRESHOLD <span id="thresholdVal" class="value-display">10</span></label>
+                <input type="range" id="threshold" min="0" max="50" value="10" step="1">
+            </div>
+            <div class="ctrl-group">
+                <label>🌀 PRE-BLUR <span id="preblurVal" class="value-display">0</span></label>
+                <input type="range" id="preblur" min="0" max="5" value="0" step="0.1">
+            </div>
+            <div class="progress-bar" id="progressBar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+        </div>
+
+        <div class="canvas-area">
+            <div class="badge-canvas">⚡ SMART SHARPEN PRO</div>
+            <canvas id="canvas"></canvas>
+        </div>
+
+        <div class="right-area"></div>
+
+        <div class="bottom-panel">
+            <button id="applyBtn">✨ APPLY SHARPEN</button>
+            <button id="resetBtn" class="btn-secondary">🔄 RESET IMAGE</button>
+        </div>
+    </div>
+</div>
+
+<div class="zoom-panel">
+    <canvas id="zoomCanvas" width="220" height="220"></canvas>
+    <div class="zoom-label" style="text-align:center; color:#0ff; font-size:10px;">🔍 ซูมขณะเลื่อนเมาส์</div>
+</div>
+
+<script src="script7.js"></script>
+</body>
+</html>
